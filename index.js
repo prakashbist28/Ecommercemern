@@ -1,6 +1,7 @@
 const express = require("express");
 const server = express();
 const mongoose = require("mongoose");
+const { createProduct } = require("./Controller/Product");
 const productRouter = require("./routes/Products");
 const categoriesRouter = require("./routes/Categories");
 const brandsRouter = require("./routes/Brands");
