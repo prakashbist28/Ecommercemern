@@ -23,16 +23,16 @@ exports.fetchAllProducts = async (req, res) => {
   let totalProductsQuery = Product.find(condition);
 
     if(req.query.category){
-        query = query.find({ category: req.query.category });
-        totalProductsQuery = totalProductsQuery.find({ category : req.query.category})
+        query = query.find({ category: {$in: req.query.category.split(',')} }); 
+        totalProductsQuery = totalProductsQuery.find({category: {$in: req.query.category.split(',')},})
     }
 
     if(req.query.brand){
-        query = query.find({ brand: req.query.brand });
-        totalProductsQuery = totalProductsQuery.find({ category : req.query.brand})
+        query = query.find({ brand: {$in: req.query.brand.split(',')} });
+        totalProductsQuery = totalProductsQuery.find({ category : {$in: req.query.brand.split(',')}}) 
     }
 
-    if(req.query._sort && req.query._order){
+    if(req.query._sort && req.query._order){ 
         query = query.sort({ [req.query._sort] : req.query._order })
     }
 

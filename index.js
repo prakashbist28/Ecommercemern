@@ -27,6 +27,21 @@ const cookieParser = require('cookie-parser')
 const path = require('path');
 const { Order } = require("./model/Order");
 
+const nodemailer = require("nodemailer");
+
+//email
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // Use `true` for port 465, `false` for all other ports
+  auth: {
+    user: "roastingguru1000@gmail.com",
+    pass:process.env.MAIL_PASSWORD,
+  }, 
+}); 
+
+
+  
 
 //webhhook
 const endpointSecret = process.env.ENDPOINT_SECRET;
@@ -99,6 +114,19 @@ server.use("/users",isAuth(), usersRouter.router);
 server.use("/auth", authRouter.router);
 server.use("/cart",isAuth(), cartRouter.router);
 server.use("/orders",isAuth(), ordersRouter.router);
+// mail endpoint
+server.post('/mail',async(req, res) => {
+  const {to} = req.body;
+  let info = await transporter.sendMail({
+    from: '"Shopping site" <order@shopping.com>', // sender address
+    to: to, // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+  
+  res.json(info) 
+}) 
 // this line we add to make react router work in case of other routes doesnt match
 server.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
 
@@ -110,7 +138,7 @@ passport.use('local', new LocalStrategy({usernameField:'email'} ,async function 
       if (!user) {
         return done(null, false, { message: "invalid credentials" });
       }
-
+ 
       crypto.pbkdf2(
         password,
         user.salt,
@@ -193,16 +221,18 @@ server.post("/create-payment-intent", async (req, res) => {
 });
 
 
-
-
-
-main().catch((err) => console.log(err));
-
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL);
-  console.log("database connected");
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log("Database connected");
+  } catch (err) {
+    console.error("Database connection error:", err);
+  }
 }
 
+main()
+
 server.listen(process.env.PORT, () => {
-  console.log("server started");
+  console.log(`server started ${process.env.PORT}`);
 });
+   
