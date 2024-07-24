@@ -38,7 +38,7 @@ exports.fetchAllProducts = async (req, res) => {
         query = query.sort({ [req.query._sort] : req.query._order })
     }
 
-    const totalDocs = await totalProductsQuery.count().exec();
+    const totalDocs = await totalProductsQuery.countDocuments().exec();
 
    
     if(req.query._page && req.query._limit){
