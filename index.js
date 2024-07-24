@@ -27,19 +27,6 @@ const cookieParser = require('cookie-parser')
 const path = require('path');
 const { Order } = require("./model/Order");
 
-const nodemailer = require("nodemailer");
-
-//email
-let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // Use `true` for port 465, `false` for all other ports
-  auth: {
-    user: "roastingguru1000@gmail.com",
-    pass:process.env.MAIL_PASSWORD,
-  }, 
-}); 
-
 
   
 
@@ -114,21 +101,7 @@ server.use("/users",isAuth(), usersRouter.router);
 server.use("/auth", authRouter.router);
 server.use("/cart",isAuth(), cartRouter.router);
 server.use("/orders",isAuth(), ordersRouter.router);
-// mail endpoint
-server.post('/mail',async(req, res) => {
-  const {to} = req.body;
-  let info = await transporter.sendMail({
-    from: '"Shopping site" <order@shopping.com>', // sender address
-    to: to, // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-  });
-  
-  res.json(info) 
-}) 
-// this line we add to make react router work in case of other routes doesnt match
-server.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
+
 
 //passport strategies
 passport.use('local', new LocalStrategy({usernameField:'email'} ,async function (email, password, done) {

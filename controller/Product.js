@@ -24,12 +24,14 @@ exports.fetchAllProducts = async (req, res) => {
 
     if(req.query.category){
         query = query.find({ category: {$in: req.query.category.split(',')} }); 
-        totalProductsQuery = totalProductsQuery.find({category: {$in: req.query.category.split(',')},})
+        totalProductsQuery = totalProductsQuery.find({
+          category: {$in: req.query.category.split(',')},
+        });
     }
 
     if(req.query.brand){
         query = query.find({ brand: {$in: req.query.brand.split(',')} });
-        totalProductsQuery = totalProductsQuery.find({ category : {$in: req.query.brand.split(',')}}) 
+        totalProductsQuery = totalProductsQuery.find({ brand : {$in: req.query.brand.split(',')}}) 
     }
 
     if(req.query._sort && req.query._order){ 
