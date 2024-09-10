@@ -54,7 +54,7 @@ SignUp page:
 
 
 
-Customer Panel:
+# Customer Panel:
 
 
 Home page:
@@ -105,7 +105,7 @@ MyOrders:
 
 
 
-ADMIN PANEL:
+# ADMIN PANEL:
 
 Home page:
 
