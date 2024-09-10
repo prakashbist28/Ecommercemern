@@ -2,7 +2,7 @@ LIVE LINK 🔗 : [https://ecommercepb.vercel.app/]
 
 
 
-#Description
+# Description
 
 
 This ecommerce website has both admin and user panels. 
@@ -32,6 +32,8 @@ This ecommerce website has both admin and user panels.
 --> Passportjs
 
 --> Stripe
+
+
 
 
 
