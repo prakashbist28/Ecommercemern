@@ -1,26 +1,42 @@
-LIVE LINK 🔗 : https://ecommercepb.vercel.app/
+LIVE LINK 🔗 : [https://ecommercepb.vercel.app/]
+
+
+
+#Description
 
 
 This ecommerce website has both admin and user panels. 
+
 ==> Admin has the powers to add new products, check orders list and can edit order status.
+
 ==> Meanwhile user can place surf through products, add product to cart, place order by choosing payment type (cash, card), can add and edit addresses and can keep track of placed orders.
 
 
-Technologies Used:
+# Technologies Used:
 --> Reactjs
+
 --> Redux
+
 --> Nodejs
+
 --> Express
+
 --> TailwindCSS
+
 --> Mongodb
+
 --> Mongoose
+
 --> JsonWebTokens
+
 --> Passportjs
+
 --> Stripe
 
 
 
-ScreenShots : 
+# ScreenShots : 
+
 
 Login Page:
 
